@@ -4,6 +4,8 @@ backend/target/
 frontend/dist/
 .env
 .env.*
+!.env.example
+!backend/.env.example
 *.local
 .DS_Store
 .idea/
