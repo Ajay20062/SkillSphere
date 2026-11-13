@@ -70,6 +70,20 @@ Backend URL: http://localhost:8080
 
 Health check: http://localhost:8080/api/health
 
+### Deploying on Railway
+
+This repository contains two separate apps. In Railway, set the service's **Root Directory** to `backend` to deploy the Spring Boot API; Railpack can then detect `pom.xml`. To deploy the Vite UI, create a separate service with Root Directory `frontend`.
+
+For the backend service, add these variables under **Variables** in Railway. Do not rely on a local `.env` file being present in a GitHub deployment:
+
+- `DB_HOST`: the external MySQL hostname from your database provider (not `localhost`)
+- `DB_PORT`: the provider's MySQL port
+- `DB_NAME`: the database/schema name
+- `DB_USERNAME` and `DB_PASSWORD`: the database credentials
+- `PORT`: leave this to Railway
+
+If the database provider gives you a JDBC URL or requires TLS options, set `SPRING_DATASOURCE_URL` to that URL. It overrides the default assembled from the `DB_*` values. Ensure your database provider allows inbound connections from Railway and follow its TLS/network requirements. Never commit real credentials.
+
 ## 3. Run frontend
 Open another terminal:
 
