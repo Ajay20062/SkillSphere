@@ -1,11 +1,20 @@
 package com.skillsphere.dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public class AttemptRequest {
+    @NotNull(message = "User ID is required.")
     private Long userId;
+
+    @NotNull(message = "Quiz ID is required.")
     private Long quizId;
+
+    @Valid
     private List<AnswerRequest> answers;
+
     public Long getUserId() { return userId; }
     public Long getQuizId() { return quizId; }
     public List<AnswerRequest> getAnswers() { return answers; }

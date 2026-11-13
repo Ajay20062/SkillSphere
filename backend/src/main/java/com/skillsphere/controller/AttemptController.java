@@ -3,6 +3,7 @@ package com.skillsphere.controller;
 import com.skillsphere.dto.AttemptRequest;
 import com.skillsphere.model.Attempt;
 import com.skillsphere.service.AttemptService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class AttemptController {
     public AttemptController(AttemptService service) { this.service = service; }
 
     @PostMapping("/attempts")
-    public Map<String, Object> submit(@RequestBody AttemptRequest request) {
+    public Map<String, Object> submit(@Valid @RequestBody AttemptRequest request) {
         return service.submit(request);
     }
 

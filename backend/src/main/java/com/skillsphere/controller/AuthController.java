@@ -3,6 +3,7 @@ package com.skillsphere.controller;
 import com.skillsphere.dto.AuthRequest;
 import com.skillsphere.model.AppUser;
 import com.skillsphere.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
@@ -15,12 +16,12 @@ public class AuthController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, Object> register(@RequestBody AuthRequest request) {
+    public Map<String, Object> register(@Valid @RequestBody AuthRequest request) {
         return safeUser(auth.register(request));
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody AuthRequest request) {
+    public Map<String, Object> login(@Valid @RequestBody AuthRequest request) {
         return safeUser(auth.login(request));
     }
 

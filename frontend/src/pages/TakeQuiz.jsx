@@ -22,7 +22,9 @@ export default function TakeQuiz() {
         userId: user.id, quizId: Number(id),
         answers: Object.entries(answers).map(([questionId,selectedOption]) => ({ questionId: Number(questionId), selectedOption }))
       })
-      navigate('/result', { state: { ...result, quizTitle: quiz.title } })
+      const payload = { ...result, quizTitle: quiz.title }
+      localStorage.setItem('skillsphere-result', JSON.stringify(payload))
+      navigate('/result', { state: payload })
     } catch(e) { setError(e.message); setBusy(false) }
   }
   if (error && !quiz) return <div className="error-msg">{error}</div>
