@@ -32,11 +32,32 @@ The backend uses `spring.jpa.hibernate.ddl-auto=update` to create/update tables.
 Sample quizzes and questions are inserted automatically on first startup if no quizzes exist.
 
 ## 2. Configure backend
-Open `backend/src/main/resources/application.properties` and update the MySQL username/password:
+Copy the example environment file and adjust the database settings for your machine:
 
-```properties
-spring.datasource.username=root
-spring.datasource.password=your_password
+```bash
+copy .env.example .env
+```
+
+Then update the values in `.env`:
+
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=skillsphere
+DB_USERNAME=root
+DB_PASSWORD=your_password
+PORT=8080
+```
+
+In PowerShell, load them before starting the backend:
+
+```powershell
+$env:DB_HOST = 'localhost'
+$env:DB_PORT = '3306'
+$env:DB_NAME = 'skillsphere'
+$env:DB_USERNAME = 'root'
+$env:DB_PASSWORD = 'your_password'
+$env:PORT = '8080'
 ```
 
 Run the backend from the `backend` directory:
@@ -55,10 +76,16 @@ Open another terminal:
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run dev -- --host 0.0.0.0
 ```
 
 Open the URL printed by Vite (normally http://localhost:5173).
+
+To point the UI at a different backend URL, create a `frontend/.env` file:
+
+```env
+VITE_API_URL=http://localhost:8080/api
+```
 
 ## 4. Demo workflow
 1. Register a student account.
